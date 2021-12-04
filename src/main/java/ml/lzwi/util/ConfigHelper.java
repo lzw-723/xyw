@@ -1,4 +1,4 @@
-package ml.lzwi.config;
+package ml.lzwi.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class ConfigHelper {
     public static Config newConfig(long ddddd, String upass) {
-        
+
         Config config = new Config();
 
         config.setDdddd(ddddd);
@@ -41,4 +41,29 @@ public class ConfigHelper {
         }
         return config;
     }
+
+    public static class Config {
+        private long ddddd = 0L; // 学号
+        private String upass = ""; // 密码
+
+        protected Config() {
+        }
+
+        public long getDdddd() {
+            return ddddd;
+        }
+
+        protected void setDdddd(long ddddd) {
+            this.ddddd = ddddd;
+        }
+
+        public String getUpass() {
+            return upass;
+        }
+
+        protected void setUpass(String upass) {
+            this.upass = upass;
+        }
+    }
+
 }

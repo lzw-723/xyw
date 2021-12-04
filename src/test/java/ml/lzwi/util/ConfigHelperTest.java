@@ -1,4 +1,4 @@
-package ml.lzwi.config;
+package ml.lzwi.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import ml.lzwi.AppTest;
+import ml.lzwi.util.ConfigHelper.Config;
 
 public class ConfigHelperTest {
 

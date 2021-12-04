@@ -3,8 +3,8 @@ package ml.lzwi;
 import ml.lzwi.cli.MainCli;
 
 /**
- * @author lzw-723
  * 程序总入口
+ * @author lzw-723
  */
 public class App
 {
