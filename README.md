@@ -1,5 +1,6 @@
 # 校园网助手
 
+[![Test](https://github.com/lzw-723/xyw/actions/workflows/test.yml/badge.svg)](https://github.com/lzw-723/xyw/actions/workflows/test.yml)
 [![last-commit](https://img.shields.io/github/last-commit/lzw-723/xyw)](https://github.com/lzw-723/xyw)
 [![language](https://img.shields.io/github/languages/top/lzw-723/xyw)](.)
 [![release](https://img.shields.io/github/v/release/lzw-723/xyw?include_prereleases)](https://github.com/lzw-723/xyw/releases)
