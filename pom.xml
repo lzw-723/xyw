@@ -42,6 +42,14 @@
       <artifactId>JColor</artifactId>
       <version>5.2.0</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.jetbrains.skiko</groupId>
+      <artifactId>skiko-jvm</artifactId>
+      <version>0.6.7</version>
+      <scope>runtime</scope>
+    </dependency>
+
   </dependencies>
 
   <build>

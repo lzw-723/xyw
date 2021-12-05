@@ -1,6 +1,7 @@
 package ml.lzwi;
 
 import java.io.File;
+import java.util.Optional;
 
 import ml.lzwi.util.ConfigHelper;
 import ml.lzwi.util.XywUtil;
@@ -18,35 +19,14 @@ public class XywHelper {
     private long ddddd = 0L;
     private String upass = "";
     private boolean loop = true;
-    private Callback callback;
-    private Thread thread = new Thread(() -> {
-        callback.onStart();
-
-        while (loop) {
-            XywUtil.Result result = XywUtil.get(XywUtil.Action.check, ddddd, upass);
-            callback.onAction(Action.check, result);
-
-            if (!result.isSuccess()) {
-                result = XywUtil.get(Action.login, ddddd, upass);
-                callback.onAction(Action.login, result);
-            }
-
-            try {
-                Thread.sleep(4000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        callback.onStop();
-    });
+    private Optional<Callback> callback = Optional.empty();
+    private Thread thread;
 
     private XywHelper() {
     }
 
     public void setCallback(Callback callback) {
-        this.callback = callback;
+        this.callback = Optional.ofNullable(callback);
     }
 
     public static XywHelper getInstance() {
@@ -64,6 +44,34 @@ public class XywHelper {
     }
 
     public void start() {
+        loop = true;
+        thread = new Thread(() -> {
+            callback.ifPresent((action -> {
+                action.onStart();
+            }));
+
+            while (loop) {
+                XywUtil.Result result = XywUtil.get(XywUtil.Action.check, ddddd, upass);
+                callback.ifPresent((action -> {
+                    action.onAction(Action.check, result);
+                    if (!result.isSuccess()) {
+                        Result result2 = XywUtil.get(Action.login, ddddd, upass);
+                        action.onAction(Action.login, result2);
+                    }
+                }));
+
+                try {
+                    Thread.sleep(4000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            callback.ifPresent((action -> {
+                action.onStop();
+            }));
+        });
         thread.start();
     }
 
